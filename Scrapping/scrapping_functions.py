@@ -178,7 +178,7 @@ class Scrapper:
         """
         from selenium import webdriver
 
-        browser = browser = webdriver.Chrome(executable_path = self.driver_path)
+        browser = webdriver.Chrome(executable_path = self.driver_path)
         user = self.user
         pwd = self.pwd
         browser.get(account_link)
@@ -201,9 +201,12 @@ class Scrapper:
         password_input.send_keys(password)
 
         login_button = browser.find_element_by_xpath("//button[@type='submit']")
-        time.sleep(2)
+        time.sleep(1)
         login_button.click()
-        time.sleep(2)
+        time.sleep(3)
+        pass_click = browser.find_element_by_xpath("//button[text()='Plus tard']")
+        pass_click.click()
+        time.sleep(1)
         return browser
 
     def get_influencer_posts(self, df_infl, index_infl, browser, account_link, pause_time, user_name, password):
@@ -290,7 +293,10 @@ class Scrapper:
             number_of_followings = 0
         print("Nombre d'abonnement:" + str(number_of_followings))
 
-        is_verified = browser.find_element_by_xpath('html/body/div/section/main/div/header/section/div/div/span').text
+        try : 
+            is_verified = browser.find_element_by_xpath('html/body/div/section/main/div/header/section/div/div/span').text
+        except:
+            is_verified = "Not verified"
         print("Statut:" + str(is_verified))
 
         time.sleep(2)
@@ -346,7 +352,7 @@ def get_pub_info(scrapper, browser, pub, instagram_account_link, user_name, pass
     date_list = []
     typ_list = []
 
-    
+    print(pub)
     try:
         browser.get(pub)
         time.sleep(4)
@@ -411,7 +417,7 @@ def get_pub_info(scrapper, browser, pub, instagram_account_link, user_name, pass
     except:
         nb_co = "No comment"
     
-    print(pub)
+    
     print(cap)
     print(nb_co)
     print(nb_likes)
