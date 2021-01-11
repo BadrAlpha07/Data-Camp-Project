@@ -134,7 +134,7 @@ class Scrapper:
         browser = webdriver.Chrome(executable_path=self.driver_path)
         browser.implicitly_wait(10)
         browser.get("https://www.instagram.com/")
-        browser.find_element_by_xpath("//button[text()='Accept']").click() #Accept or Accepter depends on language
+        browser.find_element_by_xpath("//button[text()='Accepter']").click() #Accept or Accepter depends on language
 
         browser.implicitly_wait(10)
 
