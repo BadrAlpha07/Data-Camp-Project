@@ -67,55 +67,6 @@ class Scrapper:
         df = pd.DataFrame(Influencers, columns=['Links to profile','Name','Activity','Country','Brand'])
         return df,  df['Links to profile'].tolist()
 
-    def get_influencers_france(self):
-        """
-        Retrieving top 49 World Influencers in France
-        ---------
-        Input : local path to Chrome WebDriver
-        ---------
-        Outputs :
-            df : DataFrame with influencers' related infos
-            df['Links to profile'].tolist() : list of the accounts' links
-        """
-        browser = webdriver.Chrome(executable_path=self.driver_path)
-
-        url = "https://hypeauditor.com/top-instagram/all/france/"
-        browser.get(url)
-        browser.implicitly_wait(10)
-        soup = BeautifulSoup(browser.page_source, 'html.parser')
-        browser.quit()
-
-        insta_acc_links_int=[]
-        names_int=[]
-        activity = []
-
-        inst_in = soup.find('div',attrs={'class':"page"})
-        inst_1 = inst_in.find('div',attrs={'class':"page__content"})
-        inst_2 = inst_1.find('div',attrs={'class':"tab"}).find('table',attrs={'class':"table"}).find('tbody',attrs={'class':"tbody"})
-        inst_2 = inst_1.find_all('tr',attrs={'class':"tr"})
-        for influencer in inst_2:
-            inf = influencer.find_all('td',attrs={'class':"td"})
-            info_1 = inf[2].find('div',attrs={'class':"contributor-wrap cont__info"}).find_all('a')
-            try:
-                info_2 = info_1[0].find('div',attrs={'class':"contributor__title"}).text
-            except:
-                info_2 = info_1[0].find('div',attrs={'class':"contributor__name-content"}).text
-            names_int.append(info_2)
-
-            info_2 = info_1[1]['href']
-            insta_acc_links_int.append(info_2)
-            activities = []
-            info_3 = inf[3].find_all('div',attrs={'class':"tag__content"})
-            for i in info_3:
-                activities.append(i.text)
-            activity.append(activities)
-        Influencers = {'Links to profile': insta_acc_links_int,
-                    'Name': names_int,
-                    'Activity': activity
-                    }
-        df = pd.DataFrame(Influencers, columns=['Links to profile','Name','Activity'])
-        return df,  df['Links to profile'].tolist()
-
     def connection_instagram(self):
         """
         Connecting to instagram and passing connection messages
@@ -282,7 +233,7 @@ class Scrapper:
         nb_likes_list = []
         date_list = []
         typ_list = []
-
+        print(pub)
 
         try:
             browser.get(pub)
@@ -348,7 +299,7 @@ class Scrapper:
         except:
             nb_co = "No comment"
 
-        print(pub)
+    
         print(cap)
         print(nb_co)
         print(nb_likes)
