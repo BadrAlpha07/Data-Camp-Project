@@ -10,3 +10,8 @@ Instagram offers to brands through the intermediairy of influencers, a direct di
 
 
 ## Get Started
+
+The starting kit notebook provides more details on this challenge, an exploratory analysis on the data used, and a first simple model.
+
+To get started on this challenge follow the instructions in the following link : https://paris-saclay-cds.github.io/ramp-docs/ramp-workflow/stable/using_kits.html
+
