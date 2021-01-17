@@ -1,6 +1,8 @@
+import numpy as np
+import pandas as pd
 from sklearn.compose import ColumnTransformer, make_column_transformer
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import FunctionTransformer, StandardScaler, OneHotEncoder
+from sklearn.preprocessing import FunctionTransformer, StandardScaler, OneHotEncoder, LabelEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 import nlp_pre_processing
@@ -20,11 +22,11 @@ def processing_data(X):
     X_topic_sents_keywords = nlp_pre_processing.LDAmodel(X.clean_post_description,passes=2,
                                    num_topics=5,
                                    workers = 2,
-                                  re_train=False)
+                                   re_train=False)
     X = pd.concat([X, X_topic_sents_keywords], axis=1)
  
-    return np.c_[X['sentiment'].values,X['media_type'].values,
-                X['Day_week'].values, X['polarity'].values,
+    return np.c_[X['Day_week'].values,X['media_type'].values],
+                X['sentiment'].values, X['polarity'].values,
                 X['num_hashtags'].values,X['num_ref'].values,
                 X['dominant_topic'].values,X['perc_contribution'].values]
                   
