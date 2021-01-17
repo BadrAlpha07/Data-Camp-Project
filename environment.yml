@@ -15,5 +15,6 @@ dependencies:
   - langid
   - googletrans
   - string
+  - tabulate
   - pip:
       - ramp-workflow
