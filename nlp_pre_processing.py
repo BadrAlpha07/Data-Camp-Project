@@ -105,9 +105,9 @@ def LDAmodel(X,passes=2,num_topics=10,workers = 2,re_train=False):
                                            id2word = dictionary,                                    
                                            passes = passes,
                                            workers = workers)
-        ldamodel.save("Topic_modeling_weights\ldamodel_weights")
+        ldamodel.save("Topic_modeling_weights//ldamodel_weights")
     else:
-        ldamodel = LdaModel.load("Topic_modeling_weights\ldamodel_weights")
+        ldamodel = LdaModel.load("Topic_modeling_weights//ldamodel_weights")
         
     sent_topics_df = pd.DataFrame()
     for i, row in enumerate(ldamodel[bow_corpus]):
