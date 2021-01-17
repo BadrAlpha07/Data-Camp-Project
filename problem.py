@@ -12,6 +12,8 @@ problem_title = 'Prediction of the engagement rate'
 _target_column_name = 'ER'
 # A type (class) which will be used to create wrapper objects for y_pred
 Predictions = rw.prediction_types.make_regression()
+# An object implementing the workflow
+workflow = rw.workflows.Estimator()
 
 
 class RMSE(BaseScoreType):
