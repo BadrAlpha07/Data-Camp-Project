@@ -25,7 +25,7 @@ def processing_data(X):
                                    re_train=False)
     X = pd.concat([X, X_topic_sents_keywords], axis=1)
  
-    return np.c_[X['Day_week'].values,X['media_type'].values],
+    return np.c_[X['Day_week'].values,X['media_type'].values,
                 X['sentiment'].values, X['polarity'].values,
                 X['num_hashtags'].values,X['num_ref'].values,
                 X['dominant_topic'].values,X['perc_contribution'].values]
