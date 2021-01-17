@@ -7,16 +7,6 @@ from sklearn.preprocessing import FunctionTransformer, StandardScaler, OneHotEnc
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 
-df = pd.read_csv('data/preprocess_data.csv')
-df = df.drop(columns=['Unnamed: 0', 'num_followers', 'num_comments', 'num_likes', 'post_description',
-                       'clean_post_description'])
-df['sentiment'] = df['sentiment'].replace({'neutral': 0,'positive': 1, 'negative': -1})
-df['media_type'] = df['media_type'].replace({'Photo': 0,'Video': 1})
-
-df['Day_week'] = LabelEncoder().fit_transform(df['Day_week'])
-
-df = pd.concat([df, pd.get_dummies(df['pr_activity'])], axis=1)
-df = df.drop(columns=['pr_activity', 'Modèle', 'influencer'])
 
 def processing_data(X):
     X['sentiment'] = X['sentiment'].replace({'neutral': 0,'positive': 1,'negative': -1})
